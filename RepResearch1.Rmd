@@ -20,6 +20,7 @@ library(lubridate)
 Loading and preprocessing the data
 
 ```{r}
+setwd("C:/Users/johnarmistead/Data Sci Coursera/Class5/")
 raw <- read.csv("activity.csv", header=TRUE, sep=",", colClasses = c("numeric", "character", "integer"))
 data <- as.data.frame(raw)
 data$date <- ymd(data$date)
@@ -42,7 +43,7 @@ cat("Median without NAs:", b)
 
 Create a plot to visualize mean total steps per day without missing values.
 
-```{r}
+```{r total_steps_per_day_histogram, fig.keep="all", fig.show="asis"}
 plot1 <- ggplot(cdat, aes(x=steps))+
         geom_histogram(fill="blue", binwidth=1000)+
         labs(title="Total Steps per Day", x="Steps per Day", y="Frequency")
@@ -54,7 +55,7 @@ print(plot1)
 What is the average daily activity pattern?
 Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis).
 
-```{r}
+```{r timeseries, fig.keep="all", fig.show="asis"}
 ddat <- data %>%
         select(steps, date, interval) %>%
         filter(!is.na(steps))
@@ -109,7 +110,7 @@ Make a histogram of the total number of steps taken each day and Calculate and r
 Do these values differ from the estimates from the first part of the assignment?
 Create a histogram of the new total steps per day with imputed values.
 
-```{r}
+```{r newhistogram, fig.keep="all", fig.show="asis"}
 ggplot(fullsteps, aes(x=steps))+
         geom_histogram(fill="blue", binwidth=1000)+
         labs(title="Total Steps per Day", x="Steps per Day", y="Frequency")
